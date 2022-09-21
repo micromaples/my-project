@@ -1,0 +1,15 @@
+# Spring配置
+spring:
+  jackson:
+    #时间戳统一转换为指定格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 时区修改为东8区
+    time-zone: GMT+8
+  # 启用指定配置文件
+  #（文件名需满足application-{profile}.yml的格式）
+  profiles:
+    active: druid
+server:
+  port: 8899
+logging:
+  config: classpath:logback-spring.xml

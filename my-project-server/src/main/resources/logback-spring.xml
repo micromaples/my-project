@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <substitutionProperty name="logBase" value="./logs/" />
+    <substitutionProperty name="logName" value="my-project-server" />
+    <substitutionProperty name="logPatternExp" value="%date{YYYY-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger{9999} %L -=> %msg%n" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${logPatternExp}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logBase}${logName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}${logName}-%d{yyyy-MM-dd}-%i.zip</fileNamePattern>
+            <maxHistory>180</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>30MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logPatternExp}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- project default level -->
+    <logger name="com.micromaple.my.project.server" level="DEBUG" />
+    <logger name="org.springframework" level="ERROR" />
+
+    <!-- root -->
+    <root level="DEBUG">
+        <appender-ref ref="console" />
+        <appender-ref ref="rollingFile" />
+    </root>
+</configuration>
