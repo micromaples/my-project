@@ -5,6 +5,7 @@ import com.micromaple.my.project.common.dto.BaseResult;
 import com.micromaple.my.project.common.utils.MapperUtils;
 import com.micromaple.my.project.server.domain.SysUser;
 import com.micromaple.my.project.server.service.ISysUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys-user")
+@Slf4j
 public class SysUserController {
 
     @Autowired
@@ -29,6 +31,7 @@ public class SysUserController {
 
     @GetMapping("/get/all")
     public BaseResult getAll() {
+        log.info("查询所有用户");
         List<SysUser> sysUsers = sysUserService.getBaseMapper().selectList(null);
         return BaseResult.success(sysUsers);
     }
