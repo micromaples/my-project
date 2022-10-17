@@ -1,0 +1,40 @@
+# Spring配置
+spring:
+  redis:
+    host: 192.168.110.158
+    port: 6379
+    password: 123456
+    lettuce:
+      pool:
+        #最大允许连接数
+        max-active: 100
+        #最小空闲连接数,最少准备5个可用连接在连接池候着
+        min-idle: 5
+        #最大空闲连接数,空闲连接超过10个后自动释放
+        max-idle: 10
+        #当连接池到达上限后,最多等待30秒尝试获取连接,超时报错
+        max-wait: 30000
+    timeout: 2000
+  jackson:
+    #时间戳统一转换为指定格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 时区修改为东8区
+    time-zone: GMT+8
+  # 启用指定配置文件
+  #（文件名需满足application-{profile}.yml的格式）
+  profiles:
+    active: druid-prod
+server:
+  port: 8899
+logging:
+  config: classpath:logback-spring.xml
+
+# MyBatis开启二级缓存
+#mybatis:
+#  configuration:
+#    cache-enabled: true
+
+# MyBatis-Plus开启二级缓存
+mybatis-plus:
+  configuration:
+    cache-enabled: true
